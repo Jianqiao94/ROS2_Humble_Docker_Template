@@ -1,1 +1,2 @@
-docker exec -it ros2_container bash    # run the container
+docker exec -it ros2_container bash -c "source /opt/ros/humble/setup.bash; exec bash"
+
