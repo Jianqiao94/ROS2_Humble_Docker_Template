@@ -9,4 +9,5 @@ docker run -it \
            ros2_image bash
 
 
+# if you need access to usb port with your container, add the follow line and change the port name
 # --device=/dev/ttyACM0 \
