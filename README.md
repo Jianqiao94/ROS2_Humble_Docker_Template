@@ -29,3 +29,6 @@ After accessing the Docker container, you can test the ROS2 environment by runni
 3. Open a new terminal, then use the `shell_container.sh` script to access the running Docker container with `sudo ./shell_container.sh`.
 4. Inside the new terminal session in the container, start the ROS2 subscriber with `ros2 run demo_nodes_cpp listener`.
 
+## Acknowledgements
+This docker setup methodology was inspired and refined with the help of our dear colleague Toon Daemen. Thank you, Toon!
+
