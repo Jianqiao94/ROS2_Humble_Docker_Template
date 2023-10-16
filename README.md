@@ -1,34 +1,56 @@
 # ROS2 Humble Docker Template
 
-This repository provides an easy-to-use Docker template to set up a ROS2 Humble environment. The template is organized into two main directories: `ros2_ws` and `docker`.
+Use this Docker template for a quick setup of the ROS2 Humble environment.
 
-## Repository Structure
+## Repository Overview
 
-- **docker/**: This directory contains Docker-related files.
-  - **Dockerfile**: This file defines the Docker image, based on the ROS2 Humble distribution. It sets up a predefined user (`ros2_user`) and a working directory (`~/ros2_ws`).
-  - **build_image.sh**: This script builds the Docker image, tagging it as `ros2_image`.
-  - **run_container.sh**: This script runs a Docker container from the `ros2_image`, naming the container `ros2_container`.
-  - **shell_container.sh**: This script opens a new shell session in the running `ros2_container`. This is useful for opening multiple terminal sessions inside the same container.
+- **docker/**:
+  - **Dockerfile**: Defines the Docker image using ROS2 Humble, with user `ros2_user` and workspace `~/ros2_ws`.
+  - **build_image.sh**: Builds the Docker image as `ros2_image`.
+  - **run_container.sh**: Initiates a container named `ros2_container` from the `ros2_image`. 
+  - **shell_container.sh**: Opens a shell in the `ros2_container`, ideal for multiple terminal sessions.
+  
+- **ros2_ws/**: The ROS2 workspace. Any files added here are automatically synchronized with the Docker container. Add ROS2 packages here for Docker container access.
 
-- **ros2_ws/**: This directory is a placeholder for your ROS2 workspace. Place your ROS2 packages here, and they will be accessible from within the Docker container.
+## Quickstart
 
-## Usage Guide
+1. **Build the Image**: Go to `docker` and run:
+   \```
+   ./build_image.sh
+   \```
+2. **Start the Container**: From `docker`, execute:
+   \```
+   ./run_container.sh
+   \```
+3. **Additional Shell (Optional)**: For a new shell inside the running container, use:
+   \```
+   ./shell_container.sh
+   \```
 
-1. **Building the Docker Image**: Navigate to the `docker` directory and execute the `build_image.sh` script with `sudo ./build_image.sh`.
+## Testing ROS2
 
-2. **Running the Docker Container**: From the `docker` directory, run the `run_container.sh` script to start the Docker container with `sudo ./run_container.sh`.
+1. Launch a Docker container with:
+   \```
+   ./run_container.sh
+   \```
+2. Inside the container, initiate the ROS2 publisher:
+   \```
+   ros2 run demo_nodes_cpp talker
+   \```
+3. In a new terminal, access the container:
+   \```
+   ./shell_container.sh
+   ros2 run demo_nodes_cpp listener
+   \```
 
-3. **Opening a New Shell in the Docker Container (Optional)**: To open a new shell session in the running Docker container, use the `shell_container.sh` script with `sudo ./shell_container.sh`.
+## Docker Permissions
 
-## Testing Your ROS2 Environment 
+Ensure your user has appropriate permissions by adding it to the Docker group:
 
-After accessing the Docker container, you can test the ROS2 environment by running a simple ROS2 publisher and subscriber. 
+\```bash
+sudo usermod -aG docker $USER
+\```
 
-1. Start a new Docker container with `sudo ./run_container.sh`.
-2. Inside the container, start the ROS2 publisher with `ros2 run demo_nodes_cpp talker`.
-3. Open a new terminal, then use the `shell_container.sh` script to access the running Docker container with `sudo ./shell_container.sh`.
-4. Inside the new terminal session in the container, start the ROS2 subscriber with `ros2 run demo_nodes_cpp listener`.
+After executing the above command, you might need to log out and log back in for the group changes to take effect.
 
-## Acknowledgements
-This ros2 docker setup methodology was inspired and refined with the help of our dear colleague Toon Daemen. Thank you, Toon!
 
