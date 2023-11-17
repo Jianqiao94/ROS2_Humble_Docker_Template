@@ -1,55 +1,52 @@
-# ROS2 Humble Docker Template
+# ROS2 Docker Container with VNC
 
-Use this Docker template for a quick setup of the ROS2 Humble environment.
+## Motivation
 
-## Repository Overview
+Running GUI applications in Docker, especially those requiring complex graphical interfaces like ROS2 tools (RViz, rqt, etc.), can be challenging with X11 forwarding. X11, while functional, is not always stable in containerized environments and requires direct interaction with the host's display server, leading to potential security risks and compatibility issues. To address these challenges, I utilize Virtual Network Computing (VNC), which should offers a more robust and isolated solution.
 
-- **docker/**:
-  - **Dockerfile**: Defines the Docker image using ROS2 Humble, with user `ros2_user` and workspace `~/ros2_ws`.
-  - **build_image.sh**: Builds the Docker image as `ros2_image`.
-  - **run_container.sh**: Initiates a container named `ros2_container` from the `ros2_image`. 
-  - **shell_container.sh**: Opens a shell in the `ros2_container`, ideal for multiple terminal sessions.
-  
-- **ros2_ws/**: The ROS2 workspace. Any files added here are automatically synchronized with the Docker container. Add ROS2 packages here for Docker container access.
+## How VNC Works
 
-## Quickstart
+VNC allows us to create a virtual desktop within the Docker container, independent of the host's display system. This setup involves running a VNC server inside the container, which captures the output of a virtual display and makes it accessible over the network. Users can connect to this virtual desktop using a VNC client on their host machine or even remotely. 
 
-1. **Build the Image**: Go to `docker` and run:
-   ```
-   ./build_image.sh
-   ```
-2. **Start the Container**: From `docker`, execute:
-   ```
-   ./run_container.sh
-   ```
-3. **Additional Shell (Optional)**: For a new shell inside the running container, use:
-   ```
-   ./shell_container.sh
-   ```
 
-## Testing ROS2
+## Implementation Guide
 
-1. Launch a Docker container with:
-   ```
-   ./run_container.sh
-   ```
-2. Inside the container, initiate the ROS2 publisher:
-   ```
-   ros2 run demo_nodes_cpp talker
-   ```
-3. In a new terminal, access the container:
-   ```
-   ./shell_container.sh
-   ros2 run demo_nodes_cpp listener
-   ```
+### Step 1: Setting Up the Docker Container
 
-## Docker Permissions
+1. **Build the Docker Image**:
+   - Ensure Docker is installed on your system.
+   - Clone the repository containing the Dockerfile.
+   - Navigate to the directory with the Dockerfile and build the image:
+     ```
+     ./build_image.sh
+     ```
 
-Ensure your user has appropriate permissions by adding it to the Docker group:
+2. **Run the Docker Container**:
+   - Use the following command to start the container:
+     ```
+     ./run_container.sh 
+     ```
 
-```
-sudo usermod -aG docker $USER
-```
+   - When the container is built, the VNC server should launched automatically, something like:
+     ```
+     Listening for VNC connections on TCP port 5920
+     ``` 
 
-After executing the above command, you might need to log out and log back in for the group changes to take effect.
+### Step 2: Installing and Configuring VNC Viewer on Host PC
 
+1. **Download VNC Viewer**:
+   - Go to the VNC Viewer download page ([RealVNC](https://www.realvnc.com/en/connect/download/viewer/)).
+   - Download and install the version appropriate for your operating system (Windows, MacOS, Linux).
+
+2. **Connect to the Docker Container**:
+   - Open VNC Viewer.
+   - Connect to `localhost:5920` (if running Docker locally). If Docker is running on a remote machine, just replace `localhost` with the remote machine's IP address.
+   - Enter the password when prompted (as set in the Docker run command).
+
+### Step 3: Interacting with ROS2 in the Docker Container
+
+- Once connected via VNC Viewer, you should see the ROS2 environment's desktop interface.
+- You can now launch and use ROS2 tools like RViz and rqt within this virtual desktop.
+
+## Existing issue of this repo
+In the current version, although the VNC connection works and this should overcome the issue of X11. But the current desktop page on VNC viewer looks weird. This is because I haven't find suitable desktop program that both support VNC and Docker yet. THis will take sometime to working on it, improving UI of the desktop in VNC viewer mainly.   (Jianqiao, 11/17/2023)
