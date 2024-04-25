@@ -2,11 +2,11 @@
 *
 
 # But not these files and directories
-!/.gitignore
-!/docker/**
+!/docker/
+!/docker/**/*
 !/README.md
 !/ros2_ws/src/
-!/ros2_ws/src/**
+!/ros2_ws/src/**/*
 !/ros2_ws/ros_bag/
-!/ros2_ws/ros_bag/**
+!/ros2_ws/ros_bag/**/*
 !/ros2_ws/source_env.sh
