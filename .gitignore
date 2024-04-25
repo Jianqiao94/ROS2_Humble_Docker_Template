@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+# But not these files and directories
+!/.gitignore
+!/docker/**
+!/README.md
+!/ros2_ws/src/**
+!/ros2_ws/ros_bag/**
+!/source_env.sh
