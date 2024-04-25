@@ -1,12 +1,31 @@
-# Ignore everything
-*
+# General
+*.py[cod]
+__pycache__/
+*.swp
+.DS_Store
+Thumbs.db
+*.log
+*.cfg
 
-# But not these files and directories
-!/docker/
-!/docker/**/*
-!/README.md
-!/ros2_ws/src/
-!/ros2_ws/src/**/*
-!/ros2_ws/ros_bag/
-!/ros2_ws/ros_bag/**/*
-!/ros2_ws/source_env.sh
+# Python virtual environments
+venv/
+.env
+
+# ROS build and log directories
+ros2_ws/install/**
+ros2_ws/log/**
+ros2_ws/build/**
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-workspace
+
+
+# Media files you don't want to track
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.avi
+*.mp4
