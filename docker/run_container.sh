@@ -1,6 +1,6 @@
 docker run -it \
            --rm \
-           -v "$(pwd)/../ros2_ws":/home/ros2_user/ros2_ws \
+           -v "$(pwd)/../vega_system":/home/ros2_user/vega_system \
            --env="DISPLAY" \
            --env="QT_X11_NO_MITSHM=1" \
            --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \

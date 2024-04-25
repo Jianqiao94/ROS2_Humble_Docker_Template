@@ -1,0 +1,1 @@
+I create this pull_recordingdata.sh to get recordings from 6 xaviers. You won't need them. 

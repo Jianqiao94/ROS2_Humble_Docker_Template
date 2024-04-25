@@ -7,6 +7,17 @@
 # Load a pre-configured ROS 2 environment with the 'Humble' release
 FROM osrf/ros:humble-desktop
 
+
+# IF you need to install some library, e.g. numpy, uncomment these lines 
+# RUN apt-get update && apt-get install -y \
+#     python3-pip \
+#     libgl1-mesa-glx \
+#     libgl1-mesa-dri \
+#     && rm -rf /var/lib/apt/lists/*
+
+# # Install Python packages
+# RUN pip3 install pyserial PyYAML numpy OpenCV
+
 # set the username in the container, used to create a user with a specific user and group ID inside the container.
 ARG UNAME=ros2_user 
 
@@ -34,7 +45,7 @@ USER $UNAME
 #COPY ./sudoers /etc/sudoers
 
 # Sets the working directory in the container
-WORKDIR /home/$UNAME/ros2_ws
+WORKDIR /home/$UNAME/vega_system
 
 EXPOSE 11011-11310 
 # Forward the roscore port

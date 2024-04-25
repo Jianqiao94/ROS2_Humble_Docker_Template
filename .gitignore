@@ -12,9 +12,9 @@ venv/
 .env
 
 # ROS build and log directories
-ros2_ws/install/**
-ros2_ws/log/**
-ros2_ws/build/**
+vega_system/ros2_ws/install/**
+vega_system/ros2_ws/log/**
+vega_system/ros2_ws/build/**
 
 # IDE specific files
 .idea/
