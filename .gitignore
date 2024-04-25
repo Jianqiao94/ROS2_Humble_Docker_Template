@@ -5,6 +5,8 @@
 !/.gitignore
 !/docker/**
 !/README.md
+!/ros2_ws/src/
 !/ros2_ws/src/**
+!/ros2_ws/ros_bag/
 !/ros2_ws/ros_bag/**
-!/source_env.sh
+!/ros2_ws/source_env.sh
