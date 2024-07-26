@@ -11,8 +11,8 @@ echo -e "\033[1;33mSourcing ROS2 distribution environment...\033[0m"
 source /opt/ros/humble/setup.bash
 
 # Build the Retain Interface with colcon
-echo -e "\033[1;33mBuilding Retain Interface. This may take a few minutes...\033[0m"
-colcon build --symlink-install --packages-select retainvil_interfaces
+echo -e "\033[1;33mBuilding ROS2 packages...\033[0m"
+colcon build
 echo -e "\033[1;32mBuilding complete!\033[0m\n"
 
 # Source the ROS2 customlized setup
